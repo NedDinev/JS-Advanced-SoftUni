@@ -1,21 +1,24 @@
-function cars(arr) {
-  let obj = {};
-  let instr = {
-    create: (name1, inherit, name2) =>
-      (obj[name1] = inherit ? Object.create(obj[name2]) : {}),
-    set: (name, key, value) => (obj[name][key] = value),
+function cars(commands) {
+  let cars = {};
+
+  let obj = {
+    create: (name, inherits, value) =>
+      (cars[name] = inherits ? Object.create(cars[value]) : {}),
+
+    set: (name, key, value) => (cars[name][key] = value),
     print: (name) => {
-      let array = [];
-      for (let key in obj[name]) {
-        array.push(`${key}:${obj[name][key]}`);
+      let entry = [];
+      for (let key in cars[name]) {
+        entry.push(`${key}:${cars[name][key]}`);
       }
-      console.log(array.join(","));
+      console.log(entry.join(", "));
     },
   };
-  arr.forEach((el) => {
-    let [c, n, k, v] = el.split(" ");
-    instr[c](n, k, v);
-  });
+
+  for (let command of commands) {
+    let [cmd, name, key, value] = command.split(" ");
+    obj[cmd](name, key, value);
+  }
 }
 cars([
   "create c1",
