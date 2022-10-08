@@ -1,4 +1,4 @@
-function cars(commands) {
+function solve(commands) {
   let cars = {};
 
   let obj = {
@@ -20,7 +20,7 @@ function cars(commands) {
     obj[cmd](name, key, value);
   }
 }
-cars([
+solve([
   "create c1",
   "create c2 inherit c1",
   "set c1 color red",
